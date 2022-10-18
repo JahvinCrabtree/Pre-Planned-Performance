@@ -47,6 +47,10 @@ public class RegisterController {
     @FXML
     private PasswordField setPasswordField;
 
+    /* Checks to see if the 2 passwords match, and if they
+       do match allows for teh account to be registered. 
+       and then adds the information to the database. */
+
     public void registerButtonOnAction(ActionEvent event) {
         if (setPasswordField.getText().equals(confirmPasswordField.getText())) {
             registerUser();
@@ -56,6 +60,8 @@ public class RegisterController {
         }
         
     }
+
+    /* Close Button code so that the application can be exited. */
 
     public void closeButtonOnAction(ActionEvent event) {
         Stage stage = (Stage) closeButton.getScene().getWindow();
@@ -67,13 +73,19 @@ public class RegisterController {
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
 
+        /* Stores the users input into the variables. */
+
         String username = usernameTextField.getText();
         String email = emailTextField.getText();
         String password = setPasswordField.getText();
 
+        /* Inserts the stores variables into the database. */
+        
         String insertFields = "INSERT INTO user_account(username, email, password) VALUES ('";
         String insertValues = username + "','" + email + "','" + password + "')";
         String insertToRegister = insertFields + insertValues;
+
+        /* Try and catch statement to help catch any errors. */
 
         try {
             Statement statement = connectDB.createStatement();

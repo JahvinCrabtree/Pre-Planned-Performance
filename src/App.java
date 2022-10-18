@@ -18,6 +18,8 @@ public class App extends Application {
   Parent root;
 try {
     
+    /* Loads the initial first page that's built using the FXML scenebuilder. */
+    
     root = FXMLLoader.load(getClass().getResource("Login.fxml"));
     Scene scene = new Scene(root);
     primaryStage.setTitle("PPF Home.");
