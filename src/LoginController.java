@@ -42,28 +42,22 @@ public class LoginController {
     @FXML
     private Button trainingPlanButton;
 
-
-
     public void userLogin(ActionEvent event) throws IOException {
         checkLogIn();   
         userPageForm();
-
-    }
-
-    public void registrationPage(ActionEvent event) throws IOException {
-        createAccountForm();
-    }
-
-    public void trainingPage(ActionEvent event) throws IOException {
-        trainingPlanForm();
     }
     
     private void checkLogIn() throws IOException {
+
+        /* Checks to make sure the details from the text box
+           match up with the information in the database, this then allows
+           for the user to move to the next page. */
 
         DatabaseConnection connectNow = new DatabaseConnection();
         Connection connectDB = connectNow.getConnection();
         String verifyLogin = "SELECT count(1) FROM user_account WHERE username = '" + username.getText() + "' AND password = '" + password.getText() + "'";
        
+        /* Connects to the database to compare the details with stored data. */
 
         try {
             Statement statement = connectDB.createStatement();
@@ -82,6 +76,16 @@ public class LoginController {
             e.printStackTrace();
             e.getCause();
         }
+    }
+
+    /* Buttons that allow for the access to other pages. */
+
+    public void registrationPage(ActionEvent event) throws IOException {
+        createAccountForm();
+    }
+
+    public void trainingPage(ActionEvent event) throws IOException {
+        trainingPlanForm();
     }
 
     public void createAccountForm() {
